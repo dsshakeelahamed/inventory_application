@@ -1,5 +1,5 @@
-from sqlalchemy import create_engine,MetaData, Table, and_
-import config as cfg
+from sqlalchemy import create_engine, MetaData, Table, and_
+from inventory_application.inventory_config import config as cfg
 
 
 class DatabaseModule:

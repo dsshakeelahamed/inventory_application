@@ -2,9 +2,12 @@ from flask import Flask, request, Response
 from flask_restful import Resource, Api
 import json
 
-from service import Service
+from inventory_application.inventory_service.service import Service
 
 service = Service()
+
+app = Flask("inventory_service")
+api = Api(app)
 
 
 class InventorySingle(Resource):
@@ -160,9 +163,8 @@ class InventoryUndo(Resource):
             response.data = json.dumps({"message": "Error while parsing data"})
             return response
 
-app = Flask("inventory_service")
-api = Api(app)
-api.add_resource(InventoryAll, "/inventory/all")
+
 api.add_resource(InventorySingle, "/inventory/")
+api.add_resource(InventoryAll, "/inventory/all")
 api.add_resource(InventoryUndo, "/inventory/undo/")
 
