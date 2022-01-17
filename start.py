@@ -1,4 +1,4 @@
-from inventory_rest.rest import app
+from rest.rest import app
 
 if __name__ == "__main__":
     app.run(debug=True, port=8080)

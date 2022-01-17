@@ -2,7 +2,7 @@ from flask import Flask, request, Response
 from flask_restful import Resource, Api
 import json
 
-from inventory_application.inventory_service.service import Service
+from inventory_application.service.service import Service
 
 service = Service()
 
