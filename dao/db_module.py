@@ -6,7 +6,7 @@ class DatabaseModule:
     """
     Module which connects to database and executes queries
     """
-    def __init__(self):
+    def __init__(self, initialize=False):
         """
         Initialize database engine
         """
@@ -15,7 +15,8 @@ class DatabaseModule:
                 "mysql://%s:%s@%s:%s/%s" % (cfg.mysql_user, cfg.mysql_password, cfg.mysql_host, cfg.mysql_port, cfg.database))
             self.connection = self.engine.connect()
             self.metadata = MetaData()
-            self.__init_table()
+            if initialize:
+                self.__init_table()
 
         except Exception as e:
             print(e)
@@ -27,7 +28,6 @@ class DatabaseModule:
         :return: None
         """
         self.inventory_table = Table(cfg.inventory_table, self.metadata, autoload=True, autoload_with=self.engine)
-
 
     def __execute(self, query):
         """
