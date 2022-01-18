@@ -14,7 +14,7 @@ class Service:
 
     """
     def __init__(self):
-        self.db_module = DatabaseModule()
+        self.db_module = DatabaseModule(True)
 
     def add_inventory(self, **data):
         """

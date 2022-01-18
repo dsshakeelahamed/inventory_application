@@ -1,3 +1,5 @@
+application_host = "localhost"
+application_port = 8080
 mysql_user = ""
 mysql_password = ""
 mysql_host = ""

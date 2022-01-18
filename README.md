@@ -26,3 +26,20 @@ The fields to be updated are\
 4) Run `python3 create_table.py` to create the inventory table.
 5) At this point, all the setup is complete, run `python3 start.py` to start application.
 
+By default, the application is started on url `http://localhost:8080/`. 
+To host the application on a server and access remotely,
+update `config/config.py` to set `application_host = "0.0.0.0"` and access the application using `http://<server_ip>:<port_no>/`
+
+**Sample Requests**
+1) Insert a record -
+    `curl --request POST --data '{"id" : 1, "name" : "inventory_test", "cost" : 100 , "location" : "test_location"}' http://127.0.0.1:8080/inventory`   
+2) Retrieve a record - 
+    `curl --request GET  --data '{"id" : 1}' http://127.0.0.1:8080/inventory`
+3) Retrieve all records
+    `curl --request GET http://127.0.0.1:8080/inventory/all`
+4) Update a record
+    `curl --request PUT --data '{"id" : 1, "name" : "inventory_test_update", "cost" : 111 }' http://127.0.0.1:8080/inventory`
+5) Delete a record
+    `curl --request DELETE --data '{"id" : 1, "deletion_comments" : "Deleting record 1"}' http://127.0.0.1:8080/inventory`
+6) Restore a record
+    `curl --request PUT --data '{"id" : 1}' http://127.0.0.1:8080/inventory/undo`
