@@ -3,3 +3,4 @@ mysqlclient
 mysql-connector
 flask
 flask-restful
+coverage

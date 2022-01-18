@@ -19,3 +19,4 @@ bin-release/
 
 */config/*
 */__pycache__/*
+.coverage
