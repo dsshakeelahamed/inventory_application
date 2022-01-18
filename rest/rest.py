@@ -2,7 +2,7 @@ from flask import Flask, request, Response
 from flask_restful import Resource, Api
 import json
 
-from inventory_application.service.service import Service
+from service.service import Service
 
 service = Service()
 
@@ -164,7 +164,7 @@ class InventoryUndo(Resource):
             return response
 
 
-api.add_resource(InventorySingle, "/inventory/")
+api.add_resource(InventorySingle, "/inventory")
 api.add_resource(InventoryAll, "/inventory/all")
-api.add_resource(InventoryUndo, "/inventory/undo/")
+api.add_resource(InventoryUndo, "/inventory/undo")
 

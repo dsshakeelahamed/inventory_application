@@ -1,5 +1,5 @@
 from sqlalchemy import create_engine, MetaData, Table, and_
-from inventory_application.config import config as cfg
+from config import config as cfg
 
 
 class DatabaseModule:
@@ -11,15 +11,23 @@ class DatabaseModule:
         Initialize database engine
         """
         try:
-            engine = create_engine(
+            self.engine = create_engine(
                 "mysql://%s:%s@%s:%s/%s" % (cfg.mysql_user, cfg.mysql_password, cfg.mysql_host, cfg.mysql_port, cfg.database))
-            self.connection = engine.connect()
-            metadata = MetaData()
-            self.inventory_table = Table(cfg.inventory_table, metadata, autoload=True, autoload_with=engine)
+            self.connection = self.engine.connect()
+            self.metadata = MetaData()
+            self.__init_table()
 
         except Exception as e:
-            print(e.args)
+            print(e)
             raise Exception("Could not connect to mysql")
+
+    def __init_table(self):
+        """
+        Initializing ORM table inventory table
+        :return: None
+        """
+        self.inventory_table = Table(cfg.inventory_table, self.metadata, autoload=True, autoload_with=self.engine)
+
 
     def __execute(self, query):
         """
@@ -76,14 +84,14 @@ class DatabaseModule:
         query = query.where(self.inventory_table.columns.id == data.get("id"))
         return self.__execute(query)
 
-    def reverse_delete(self, id):
+    def reverse_delete(self, **data):
         """
         To build reverse delete query for a particular inventory where is_deleted is set to 0 to mark it delete (soft delete)
         :param data: dictionary of inventory object
         :return: query response
         """
         query = self.inventory_table.update().values(is_deleted=0)
-        query = query.where(self.inventory_table.columns.id == id)
+        query = query.where(self.inventory_table.columns.id == data.get("id"))
         return self.__execute(query)
 
 
