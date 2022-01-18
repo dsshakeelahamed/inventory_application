@@ -15,3 +15,4 @@ class Inventory:
         self.is_deleted = 0
         self.created = datetime.datetime.now()
         self.updated = datetime.datetime.now()
+        self.deletion_comments = kwargs.get("deletion_comments", None)

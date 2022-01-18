@@ -1,5 +1,5 @@
-from inventory_application.entity.inventory import Inventory
-from inventory_application.dao.db_module import DatabaseModule
+from entity.inventory import Inventory
+from dao.db_module import DatabaseModule
 
 
 class Service:
