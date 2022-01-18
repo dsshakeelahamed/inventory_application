@@ -12,7 +12,7 @@ The application is made up of 3 components
 Mysql can be installed on respective operating system from below link \
 https://dev.mysql.com/doc/mysql-installation-excerpt/5.7/en/
 
-To install python (v3.8.2), refer to the below link (preferred version 3.8.2) \ 
+To install python (v3.8.2), refer to the below link (preferred version 3.8.2) \
 https://realpython.com/installing-python/
 
 **Installation guide** :-
