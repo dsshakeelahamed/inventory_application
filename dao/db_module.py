@@ -1,5 +1,5 @@
 from sqlalchemy import create_engine, MetaData, Table, and_
-from config import config as cfg
+import utility.utility as utils
 
 
 class DatabaseModule:
@@ -11,12 +11,14 @@ class DatabaseModule:
         Initialize database engine
         """
         try:
+            self.cfg = utils.get_environment_configs()
             self.engine = create_engine(
-                "mysql://%s:%s@%s:%s/%s" % (cfg.mysql_user, cfg.mysql_password, cfg.mysql_host, cfg.mysql_port, cfg.database))
+                "mysql://%s:%s@%s:%s/%s" % (self.cfg.mysql_user, self.cfg.mysql_password, self.cfg.mysql_host, self.cfg.mysql_port, self.cfg.database))
             self.connection = self.engine.connect()
             self.metadata = MetaData()
             if initialize:
                 self.__init_table()
+
 
         except Exception as e:
             print(e)
@@ -27,7 +29,7 @@ class DatabaseModule:
         Initializing ORM table inventory table
         :return: None
         """
-        self.inventory_table = Table(cfg.inventory_table, self.metadata, autoload=True, autoload_with=self.engine)
+        self.inventory_table = Table(self.cfg.inventory_table, self.metadata, autoload=True, autoload_with=self.engine)
 
     def __execute(self, query):
         """

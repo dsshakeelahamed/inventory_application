@@ -92,7 +92,7 @@ class Service:
             database_response = self.db_module.delete(**data)
             if database_response.rowcount > 0:
                 return {"message": "Successfully deleted inventory for id %s" % data.get("id")}, 200
-            return {"message": "Record does not exist" % (data.get("id"))}, 404
+            return {"message": "No records found for id %s" % (data.get("id"))}, 404
         except Exception as e:
             print("Error deleting record")
             return {"message": "Error deleting record"}, 500
@@ -109,7 +109,7 @@ class Service:
             database_response = self.db_module.reverse_delete(**data)
             if database_response.rowcount > 0:
                 return {"message": "Successfully restored inventory for id %s" % data.get("id")}, 200
-            return {"message": "Record does not exist for id " % (data.get("id"))}, 404
+            return {"message": "No records found for id %s" % (data.get("id"))}, 404
         except Exception as e:
             print("Error restoring record")
             return {"message": "Error restoring record"}, 500
@@ -124,9 +124,9 @@ class Service:
             if not self.validate(data.get("id", "")):
                 return {"message": "Invalid Inventory ID"}, 400
             database_response = self.db_module.update(**data)
-            if database_response.rowcount:
+            if database_response.rowcount > 0:
                 return {"message": "Successfully updated inventory for id %s" % data.get("id")}, 200
-            return {"message": "Record does not exist for id " % (data.get("id"))}, 404
+            return {"message": "No records found for id %s" % (data.get("id"))}, 404
         except Exception as e:
             print("Error updating record")
             return {"message": "Error updating record"}, 500

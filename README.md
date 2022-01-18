@@ -12,7 +12,7 @@ The application is made up of 3 components
 Mysql can be installed on respective operating system from below link 
 https://dev.mysql.com/doc/mysql-installation-excerpt/5.7/en/
 
-To install python (v3.8.x), refer to the below link (preferred version 3.8.2)
+To install python (v3.8.2), refer to the below link (preferred version 3.8.2)
 https://realpython.com/installing-python/
 
 **Installation guide** :-
@@ -22,13 +22,17 @@ https://realpython.com/installing-python/
 This is needed to allow ORM to connect to database.
 3) Update `config/config.py` with mysql configs\
 The fields to be updated are\
-`mysql_user, mysql_password, mysql_host, mysql_port, database, inventory_table`.
-4) Run `python3 create_table.py` to create the inventory table.
-5) At this point, all the setup is complete, run `python3 start.py` to start application.
+`mysql_user, mysql_password, mysql_host, mysql_port, database, inventory_table(name of the table to be created- Ex-"inventory_table"`.
+4) Run `python3 create_table.py dev` to create the inventory table in dev environment. Use `test` only to run test_cases.
+5) At this point, all the setup is complete, run `python3 start.py dev` to start application.
 
 By default, the application is started on url `http://localhost:8080/`. 
 To host the application on a server and access remotely,
 update `config/config.py` to set `application_host = "0.0.0.0"` and access the application using `http://<server_ip>:<port_no>/`
+
+To run test cases, update test configs in `config/config.py` and execute `coverage run -m unittest test/test_cases.py`  
+To view code coverage, run `coverage report -m`  
+
 
 **Sample Requests**
 1) Insert a record -
