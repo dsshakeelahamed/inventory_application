@@ -1,4 +1,5 @@
-#Inventory Application
+# Inventory Application
+
 This repository provides a python web application which loads/retrieves inventory records into/from database.
 
 Application Structure:- \
