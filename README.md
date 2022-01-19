@@ -31,7 +31,7 @@ To host the application on a server and access remotely,
 update `config/config.py` to set `application_host = "0.0.0.0"` and access the application using `http://<server_ip>:<port_no>/`
 
 To run test cases, update test configs in `config/config.py` and execute `coverage run -m unittest test/test_cases.py`  
-To view code coverage, run `coverage report -m`  
+To view code coverage, run `coverage report -m`  (current coverage at 87%)
 
 
 **Sample Requests**
