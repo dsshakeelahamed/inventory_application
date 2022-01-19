@@ -34,7 +34,7 @@ class DatabaseModule:
     def __execute(self, query):
         """
         Execute a given query
-        :param query: query to be executed
+        :param object query: query to be executed
         :return: query response
         """
         return self.connection.execute(query)
@@ -42,7 +42,7 @@ class DatabaseModule:
     def insert(self, **data):
         """
         To build insert query for inventory
-        :param data: dictionary of inventory object
+        :param dict data: dictionary of inventory object
         :return: query response
         """
         query = self.inventory_table.insert().values(data).prefix_with("IGNORE")
@@ -51,7 +51,7 @@ class DatabaseModule:
     def get(self, **data):
         """
         To build get query for a particular inventory
-        :param data: dictionary of inventory object
+        :param dict data: dictionary of inventory object
         :return: query response
         """
         query = self.inventory_table.select().where(and_(self.inventory_table.columns.id == data.get("id"), self.inventory_table.columns.is_deleted == 0))
@@ -60,7 +60,7 @@ class DatabaseModule:
     def get_all(self):
         """
         To build get query for all inventory
-        :param data: dictionary of inventory object
+        :param dict data: dictionary of inventory object
         :return: query response
         """
         query = self.inventory_table.select().where(and_(self.inventory_table.columns.is_deleted == 0))
@@ -69,7 +69,7 @@ class DatabaseModule:
     def update(self, **data):
         """
         To build update query for a particular inventory
-        :param data: dictionary of inventory object
+        :param dict data: dictionary of inventory object
         :return: query response
         """
         query = self.inventory_table.update().values(data)
@@ -79,7 +79,7 @@ class DatabaseModule:
     def delete(self, **data):
         """
         To build delete query for a particular inventory where is_deleted is set to 1 to mark it delete (soft delete)
-        :param data: dictionary of inventory object
+        :param dict data: dictionary of inventory object
         :return: query response
         """
         query = self.inventory_table.update().values(is_deleted=1, deletion_comments = data.get("deletion_comments", ""))
@@ -89,7 +89,7 @@ class DatabaseModule:
     def reverse_delete(self, **data):
         """
         To build reverse delete query for a particular inventory where is_deleted is set to 0 to mark it delete (soft delete)
-        :param data: dictionary of inventory object
+        :param dict data: dictionary of inventory object
         :return: query response
         """
         query = self.inventory_table.update().values(is_deleted=0)

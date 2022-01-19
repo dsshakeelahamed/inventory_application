@@ -21,7 +21,7 @@ class Service:
         Adds user records into databases
         throws error if user id provided is invalid
         :param dict data: dict of all inventory object fields and values
-        :return response, status_code: returns the respective response and status code based on input provided
+        :return dict response, int status_code: returns the respective response and status code based on input provided
         """
         if not self.validate(data.get("id", "")):
             return {"message": "Invalid Inventory ID"}, 400
@@ -38,7 +38,7 @@ class Service:
     def get_all_inventory(self):
         """
         Retrieve all Inventory records present
-        :return response, status_code: returns the respective response and status code based on input provided
+        :return dict response, int status_code: returns the respective response and status code based on input provided
         """
         try:
             database_response = self.db_module.get_all()
@@ -60,7 +60,7 @@ class Service:
         """
         Retrieve Inventory record for specified id
         :param dict data: dict of all inventory object fields and values
-        :return response, status_code: returns the respective response and status code based on input provided
+        :return dict response, int status_code: returns the respective response and status code based on input provided
         """
         try:
             if not self.validate(data.get("id", "")):
@@ -83,8 +83,8 @@ class Service:
     def delete_inventory(self, **data):
         """
         Delete a record from inventory, where a particular field is_deleted is set to 1 (soft delete)
-        :param data: dict of all inventory object fields and values
-        :return response, status_code: returns the respective response and status code based on input provided
+        :param dict data: dict of all inventory object fields and values
+        :return dict response, int status_code: returns the respective response and status code based on input provided
         """
         try:
             if not self.validate(data.get("id", "")):
@@ -100,8 +100,8 @@ class Service:
     def reverse_delete(self, **data):
         """
         Restore a record from inventory, where a particular field is_deleted is set to 0 (soft delete restore)
-        :param data: dict of all inventory object fields and values
-        :return response, status_code: returns the respective response and status code based on input provided
+        :param dict data: dict of all inventory object fields and values
+        :return dict response, int status_code: returns the respective response and status code based on input provided
         """
         try:
             if not self.validate(data.get("id", "")):
@@ -117,8 +117,8 @@ class Service:
     def update_inventory(self, **data):
         """
         To update inventory for given id
-        :param data: dict of all inventory object fields and values
-        :return response, status_code: returns the respective response and status code based on input provided
+        :param dict data: dict of all inventory object fields and values
+        :return dict response, int status_code: returns the respective response and status code based on input provided
         """
         try:
             if not self.validate(data.get("id", "")):
